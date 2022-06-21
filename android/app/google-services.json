@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "301292340480",
+    "project_id": "social-coin-practice",
+    "storage_bucket": "social-coin-practice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301292340480:android:100ccc8e24e7cc5e119fe5",
+        "android_client_info": {
+          "package_name": "com.cryptoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301292340480-2bd4o9afbe4lf8fh64qqajl796bsv3ta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbS5YLhyZfUGtTvTwycGcAsHU_eKXzL9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301292340480-2bd4o9afbe4lf8fh64qqajl796bsv3ta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
