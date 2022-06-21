@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Dimensions, View } from "react-native";
 import { useQuery } from "react-query";
 import styled from "styled-components/native";
 import { getCoins } from "../api";
-import { BLACK_COLOR } from "../colors";
+import colors from "../colors";
 import Coin from "../components/Coin";
 import Loader from "../components/Loader";
 
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
+const CoinsGapLength = (SCREEN_WIDTH * 0.1) / 4;
+
 const Container = styled.View`
-  background-color: ${BLACK_COLOR};
+  background-color: ${colors.backgroundColor};
   flex: 1;
 `;
-const List = styled.FlatList`
-  padding: 20px 10px;
-  width: 100%;
-`;
+const List = styled.FlatList``;
 
 const Home = () => {
   const { isLoading, data } = useQuery("coins", getCoins);
@@ -32,12 +32,12 @@ const Home = () => {
     return <Loader />;
   }
   return (
-    <Container>
+    <Container style={{ paddingTop: CoinsGapLength }}>
       <List
         data={cleanData}
-        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
         columnWrapperStyle={{
-          justifyContent: "space-between",
+          justifyContent: "space-evenly",
+          marginBottom: CoinsGapLength,
         }}
         numColumns={3}
         keyExtractor={(item) => item.id}
