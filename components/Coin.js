@@ -1,7 +1,9 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useRef } from "react";
-import { Animated, Dimensions, View } from "react-native";
+import { Animated, Dimensions, View, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 import colors from "../colors";
+import { coinIconUrl, Icon } from "../utils";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const CoinBoxLength = SCREEN_WIDTH * 0.3;
@@ -17,14 +19,12 @@ const CoinName = styled.Text`
   font-weight: 600;
   font-size: 16px;
 `;
-const Icon = styled.Image`
-  margin-bottom: 10px;
-`;
 
 const delayAnimaion = 200;
 const maxIndexAnimaion = 32; // recommend x, x%3 = 2
 
-const Coin = ({ symbol, index }) => {
+const Coin = ({ id, symbol, index }) => {
+  const navigation = useNavigation();
   const opacity = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.spring(opacity, {
@@ -41,22 +41,30 @@ const Coin = ({ symbol, index }) => {
     outputRange: [0.7, 1],
   });
   return (
-    <Wrapper
-      style={{
-        width: CoinBoxLength,
-        height: CoinBoxLength,
-        opacity,
-        transform: [{ scale }],
-      }}
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Detail", { symbol, id })}
     >
-      <Icon
-        style={{ width: CoinBoxLength / 3, height: CoinBoxLength / 3 }}
-        source={{
-          uri: `https://coinicons-api.vercel.app//api/icon/${symbol.toLowerCase()}`,
+      <Wrapper
+        style={{
+          width: CoinBoxLength,
+          height: CoinBoxLength,
+          opacity,
+          transform: [{ scale }],
         }}
-      />
-      <CoinName>{symbol}</CoinName>
-    </Wrapper>
+      >
+        <Icon
+          style={{
+            marginBottom: 10,
+            width: CoinBoxLength / 3,
+            height: CoinBoxLength / 3,
+          }}
+          source={{
+            uri: coinIconUrl(symbol),
+          }}
+        />
+        <CoinName>{symbol}</CoinName>
+      </Wrapper>
+    </TouchableOpacity>
   );
 };
 
